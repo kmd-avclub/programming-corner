@@ -28,7 +28,7 @@ void setup() {
 void acToPWM(int inputPin, int outputPin){
   inputSignal = analogRead(inputPin);          //inputSignal 0~1024
   inputSignal -= inputSignal/2;                //inputSignal (0~1024-512)/2 = -512~512
-  if (inputSignal < 0){                        //if input signal reaches under 0 (every negative phase), multiply it to be above 0
+  if (inputSignal < 0){                        //if inputSignal reaches under 0 (=every negative phase), multiply it above 0 (- * - = +)
     inputSignal = inputSignal * -1;
   }
   outputSignal = inputSignal/2;                //inputSignal (0~512)/2 becomes outputSignal 0~255, range of PWM
