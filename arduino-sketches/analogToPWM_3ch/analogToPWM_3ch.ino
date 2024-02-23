@@ -1,7 +1,7 @@
 /*
 this sketch takes 3 inputs A0 A1 A2 0-5V and converts to 3 outputs D9 D10 D11 PWM 0-255/0-5V.
-It can be used as a sound to light device, asuming a DC bias set between the audio signals and the analog inputs.
-The PWM can control 0-5V loads, or MOSFETS for bigger loads (such as 12 or 24VDC led strips).
+It can be used as a sound to light device, asuming a DC bias is set between the audio signals and the analog inputs.
+The PWM can control 0-5V loads, MOSFETS for bigger loads (such as 12 or 24VDC led strips), etc.
 
 The analog signal are first ranged from 0~1024 to -512~+512 to match positive/negative phases of original AC signal
 the signal is then multiplied over 0 if it is under 0, effectively turning every negative spike in a positive spike
