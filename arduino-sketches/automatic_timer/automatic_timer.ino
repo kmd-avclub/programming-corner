@@ -1,5 +1,7 @@
-const int PIN_OUT = 13;
-const int DELAY_TIME = 1000;
+
+
+const int PIN_OUT = 13; //this is the control cable pin that will go to the relay module, remember to plug also +5V and GND from the arduino to the relay module
+const int DELAY_TIME = 1000; //set timer value in milliseconds here (1sec = 1000ms)
 
 
 // the setup function runs once when you press reset or power the board
