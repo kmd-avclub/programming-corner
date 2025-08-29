@@ -1,20 +1,30 @@
-const int PIN_OUT = 13; //this is the control cable pin that will go to the relay module, remember to plug also +5V and GND from the arduino to the relay module
-const int DELAY_TIME = 5000; //set timer value in milliseconds here (1sec = 1000ms)
+#include <elapsedMillis.h> //this library should be installed with the help manager
 
+const int RELAY_CONTROL_PIN = 13;
+const int TOGGLE_INTERVAL_MS = 5000;
+const int SERIAL_BAUD_RATE = 9600;
 
-// the setup function runs once when you press reset or power the board
+// State tracking variables
+bool relayState = false;                    // Current relay state
+elapsedMillis timeElapsed;                  // Automatic timer
+
 void setup() {
-  // initialize digital pin 13 as an output.
-  pinMode(PIN_OUT, OUTPUT);
-  Serial.begin(9600);
+  pinMode(RELAY_CONTROL_PIN, OUTPUT);
+  Serial.begin(SERIAL_BAUD_RATE);
+  Serial.println("Relay controller started");
 }
 
-// the loop function runs over and over again forever
 void loop() {
-  digitalWrite(PIN_OUT, HIGH);  // turn the LED on (HIGH is the voltage level)
-  Serial.println("pin 13 is on");
-  delay(DELAY_TIME);                      // wait for a second
-  digitalWrite(PIN_OUT, LOW);   // turn the LED off by making the voltage LOW
-  Serial.println("pin 13 is off");
-  delay(DELAY_TIME);                      // wait for a second
+  // Check if enough time has elapsed
+  if (timeElapsed >= TOGGLE_INTERVAL_MS) {
+    timeElapsed = 0;                        // Reset timer
+    
+    relayState = !relayState;               // Toggle state
+    digitalWrite(RELAY_CONTROL_PIN, relayState);
+    
+    // Print current state
+    Serial.println(relayState ? "Relay ON" : "Relay OFF");
+  }
+  
+  // Other code can run here without being blocked
 }
